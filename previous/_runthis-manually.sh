@@ -42,7 +42,7 @@ echo "checkpoint 05 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt 
 echo "Update root password" && \
 echo "root:$ROOT_PASS" | chpasswd && \
 cat ~/temp/provisionninglogs.txt && \
-sleep 2 && \
+ROOT_PASS="null" && sleep 2 && \
 
 ### Launch the scripts
 echo "checkpoint 06 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt && echo && \

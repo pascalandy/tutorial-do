@@ -2,14 +2,15 @@
 
 # Exit on error. Append "|| true" if you expect an error.
 set -o errexit
+# Print a helpful message if a pipeline with non-zero exit code causes the
+# script to exit as described above.
+trap 'echo "Aborting due to errexit on line $LINENO. Exit code: $?" >&2' ERR
+
 # Exit on error inside any functions or subshells.
 set -o errtrace
 # Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
 set -o nounset
-# Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
-set -o pipefail
-# Turn on traces, useful while debugging but commented out by default
-# set -o xtrace
+
 
 step_intro() {
     ### Show this which script is running
@@ -65,15 +66,6 @@ step4() {
 }
 
 step5() {
-    echo "checkpoint SEQ-980 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt && echo;
-    echo; cat ~/temp/provisionninglogs.txt;
-
-    RUN_THIS="s98-splash.sh"
-    chmod +x $RUN_THIS; ./$RUN_THIS;
-    echo "---$RUN_THIS is done---"; sleep 2;
-}
-
-step6() {
     echo "checkpoint SEQ-990 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt && echo;
     echo; cat ~/temp/provisionninglogs.txt;
 
@@ -97,9 +89,7 @@ main() {
         #s3-ufw
     step4
         #s4-swarm
-    #step5
-        #banner issue
-    step6
+    step5
         #reboot
 }
 
