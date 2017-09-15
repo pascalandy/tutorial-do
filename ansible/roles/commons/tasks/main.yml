@@ -1,0 +1,6 @@
+- name: "Clone some git repo"
+  git: repo=https://github.com/TryGhost/Ghost version=master
+        dest=/opt/tutorial-do
+        accept_hostkey=yes
+        clone=yes
+        force=yes

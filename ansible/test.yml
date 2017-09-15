@@ -1,0 +1,18 @@
+- name: Bring up docker containers for docker connection inventory iface
+  hosts: localhost
+  roles:
+    - role: chrismeyersfsu.provision_docker
+      provision_docker_privileged: true,
+      provision_docker_inventory_group: "{{ groups['example'] }}"
+      provision_docker_use_docker_connection: true
+
+- hosts: example
+  gather_facts: no
+  pre_tasks:
+    - name: 'install python2'
+      raw: apt-get update && apt-get -y install python-simplejson
+
+- hosts: example
+  roles:
+    - { role: debops.bootstrap,                 tags: ["role:bootstrap"] }  
+    - { role: commons,                          tags: ["role:commons"] }

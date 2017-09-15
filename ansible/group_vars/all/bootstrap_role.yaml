@@ -1,0 +1,19 @@
+bootstrap__raw: True
+bootstrap__packages:
+  - dnsutils
+  - curl
+  - sudo
+  - git
+  - apt-transport-https
+  - ca-certificates
+  - gcc
+  - libffi-dev
+  - libssl-dev
+  - python-dev
+  - python-setuptools
+  - python-virtualenv
+bootstrap__admin: True
+bootstrap__admin_name: root
+bootstrap__admin_sshkeys:
+  - "{{ lookup('file', 'insecure-key.pub') }}"
+bootstrap__sudo: False

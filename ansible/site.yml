@@ -1,0 +1,6 @@
+- name: All roles
+  hosts: example
+
+  roles:
+    - { role: commons,                          tags: ["role:commons"] }
+
