@@ -11,6 +11,9 @@ set -o errtrace
 # Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
 set -o nounset
 
+###############################################################################
+# Functions
+###############################################################################
 
 step_intro() {
     ### Show this which script is running
@@ -44,7 +47,7 @@ step2() {
 
     RUN_THIS="s2-main-config.sh"
     chmod +x $RUN_THIS; ./$RUN_THIS;
-    echo "---$RUN_THIS is done---"; sleep 2;
+    docker run -it --rm mbentley/figlet "$RUN_THIS is done"; sleep 3;
 }
 
 step3() {
@@ -53,7 +56,7 @@ step3() {
     
     RUN_THIS="s3-ufw.sh"
     chmod +x $RUN_THIS; ./$RUN_THIS;
-    echo "---$RUN_THIS is done---"; sleep 2;
+    docker run -it --rm mbentley/figlet "$RUN_THIS is done"; sleep 3;
 }
 
 step4() {
@@ -62,7 +65,7 @@ step4() {
 
     RUN_THIS="s4-swarm.sh"
     chmod +x $RUN_THIS; ./$RUN_THIS;
-    echo "---$RUN_THIS is done---"; sleep 2;
+    docker run -it --rm mbentley/figlet "$RUN_THIS is done"; sleep 3;
 }
 
 step5() {
@@ -70,16 +73,19 @@ step5() {
     echo; cat ~/temp/provisionninglogs.txt;
 
     RUN_THIS="s99-reboot.sh"
+    docker run -it --rm mbentley/figlet "About to run $RUN_THIS "; sleep 3;
     chmod +x $RUN_THIS; ./$RUN_THIS;
-    echo "---$RUN_THIS is done---"; sleep 2;
 }
+
+###############################################################################
+# Main
+###############################################################################
 
 main() {
     step_intro
         #intro
-
     s97_check
-        #
+        #bash best practices
     #step1
         #s1-hardening
         #issue https://github.com/konstruktoid/hardening/issues/5#issuecomment-327035568

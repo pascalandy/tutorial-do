@@ -4,13 +4,13 @@ GITLAB_DEPLOY_SETUP_BRANCH="0.45"
 GITLAB_DEPLOY_SETUP_REPO_NAME="deploy-setup"
 GITLAB_DEPLOY_SETUP_URL="git@gitlab.com:fiasdasdasdasd/deploy-setup.git"
 GITLAB_DEPLOY_SETUP_USER="Pascal Andy"
-GITLAB_DEPLOY_SETUP_EMAIL="pascal@fiasdasdasd"
+GITLAB_DEPLOY_SETUP_EMAIL="user@example.net"
 
 GITLAB_DEPLOY_LOGS_REPO_NAME="deploy-logs"
 GITLAB_DEPLOY_LOGS_URL="git@gitlab.com:fasdasdasd/deploy-logs.git"
 GITLAB_DEPLOY_LOGS_BRANCH="master"
 GITLAB_DEPLOY_LOGS_USER="Pascal Andy"
-GITLAB_DEPLOY_LOGS_EMAIL="pascal@fasdasdasd.rg"
+GITLAB_DEPLOY_LOGS_EMAIL="user@example.net"
 
 GITLAB_INFRA_AS_CODE_REPO_NAME="infra-as-code"
 GITLAB_INFRA_AS_CODE_URL="git@gitlab.com:asdasdasd/infra-as-code.git"
@@ -24,7 +24,7 @@ ENV_SWAP_SIZE="8192M"
 
 #cloudflare
 ENV_CF_API_KEY="a0asdasdasdasdasdasd0"
-ENV_CF_API_EMAIL="pascal@fasdasd.asdorg"
+ENV_CF_API_EMAIL="user@example.net"
 
 GITLAB_PRIV_KEY="-----BEGIN OPENSSH PRIVATE KEY-----
 b3aergaergaesrgaeth

@@ -11,6 +11,10 @@ set -o errtrace
 # Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
 set -o nounset
 
+###############################################################################
+# Functions
+###############################################################################
+
 ### Show this which script is running
 echo "checkpoint 400 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt && echo;
 echo "SCRIPT s4-swarm.sh"; echo; echo; sleep 2;
@@ -22,7 +26,7 @@ source /root/deploy-setup/cmd.sh; fct_docker_swarm_manager_init;
 echo "Done | fct_docker_swarm_manager_init"; sleep 5;
 
 echo "checkpoint 402 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt && echo;
-source /root/deploy-setup/cmd.sh; fct_status.node;
+source /root/deploy-setup/cmd.sh; fct_status
 echo "Done | fct_status"; sleep 5;
 
 echo "checkpoint 403 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt && echo;

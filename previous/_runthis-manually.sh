@@ -1,9 +1,10 @@
+###############################################################################
 # Manually run 1) _config.sh  2) _runthis-manually.sh
-
+#
 # Prompts | the system will ask for 
 # A) *** cloud.cfg (Y/I/N/O/D/Z) [default=N] ? /y
 # B) The authenticity of host 'gitlab.com (52.167.219.168)' /yes
-
+###############################################################################
 
 ### Show this which script is running
 echo "SCRIPT s0-sequence.sh" && \

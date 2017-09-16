@@ -11,6 +11,9 @@ set -o errtrace
 # Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
 set -o nounset
 
+###############################################################################
+# Functions
+###############################################################################
 
 ### Show this which script is running
 echo "checkpoint 200 $(date +%Y-%m-%d_%Hh%Mm%S)" >> ~/temp/provisionninglogs.txt && echo;
