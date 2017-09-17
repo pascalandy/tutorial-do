@@ -1,0 +1,33 @@
+GITLAB_DEPLOY_SETUP_BRANCH: "0.45"
+GITLAB_DEPLOY_SETUP_REPO_NAME: "deploy-setup"
+
+GITLAB_DEPLOY_SETUP_URL: "ssh://git@gitlab.com/fiasdasdasdasd/deploy-setup.git"
+
+GITLAB_DEPLOY_SETUP_USER: "Pascal Andy"
+GITLAB_DEPLOY_SETUP_EMAIL: "user@example.net"
+
+GITLAB_DEPLOY_LOGS_REPO_NAME: "deploy-logs"
+
+GITLAB_DEPLOY_LOGS_URL: "ssh://git@gitlab.com/fasdasdasd/deploy-logs.git"
+GITLAB_DEPLOY_LOGS_BRANCH: "master"
+GITLAB_DEPLOY_LOGS_USER: "Pascal Andy"
+GITLAB_DEPLOY_LOGS_EMAIL: "user@example.net"
+
+GITLAB_INFRA_AS_CODE_REPO_NAME: "infra-as-code"
+GITLAB_INFRA_AS_CODE_URL: "ssh://git@gitlab.com/asdasdasd/infra-as-code.git"
+
+GIT_REPO_HARDENING: "https://github.com/pascalandy/hardening"
+
+SYS_ADMIN_EMAIL: "relations@asdasdasdasd"
+HOME_IP: "123.123.123.123"
+ROOT_PASS: "r0asdasdasdasdasdasd6"
+ENV_SWAP_SIZE: "512"
+
+#cloudflare
+ENV_CF_API_KEY: "a0asdasdasdasdasdasd0"
+ENV_CF_API_EMAIL: "user@example.net"
+
+GITLAB_PRIV_KEY: |
+  -----BEGIN RSA PRIVATE KEY-----
+  MIIJJwIBAAKCAgEAtRBBXlUIQGvg+P2LbrxTBMXwo6QQC7Sfk/yalz5YrqHZv9PS
+  -----END RSA PRIVATE KEY-----

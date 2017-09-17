@@ -1,6 +1,77 @@
-- name: "Clone some git repo"
-  git: repo=https://github.com/TryGhost/Ghost version=master
-        dest=/opt/tutorial-do
+- name: Ensures /root/.ssh dir exists
+  file: path=/root/.ssh
+        state=directory
+        owner=root
+        group=root
+        mode=0600
+- copy: src=./insecure-key dest=/root/.ssh/insecure-key owner=root group=root mode=0400
+
+# s1-hardening
+- git: repo={{ GITLAB_DEPLOY_SETUP_URL }} version={{ GITLAB_DEPLOY_SETUP_BRANCH }}
+        dest=/root/temp/{{ GITLAB_DEPLOY_SETUP_REPO_NAME }}
         accept_hostkey=yes
         clone=yes
         force=yes
+        key_file=/root/.ssh/insecure-key
+
+- git: repo={{ GITLAB_DEPLOY_LOGS_URL }} version={{ GITLAB_DEPLOY_LOGS_BRANCH }}
+        dest=/root/temp/{{ GITLAB_DEPLOY_LOGS_REPO_NAME }}
+        accept_hostkey=yes
+        clone=yes
+        force=yes
+        key_file=/root/.ssh/insecure-key
+
+- git: repo={{ GITLAB_INFRA_AS_CODE_URL }} version=master
+        dest=/root/temp/{{ GITLAB_INFRA_AS_CODE_REPO_NAME }}
+        accept_hostkey=yes
+        clone=yes
+        force=yes
+        key_file=/root/.ssh/insecure-key
+
+- git: repo={{ GIT_REPO_HARDENING }} version=master
+        dest=/root/temp/hardening
+        accept_hostkey=yes
+        clone=yes
+        force=yes
+        key_file=/root/.ssh/insecure-key
+
+# s2-main-config
+
+- name: Ensures /root/.cloudflare dir exists
+  file: path=/root/.cloudflare
+        state=directory
+        owner=root
+        group=root
+        mode=0600
+
+- lineinfile:
+    path: /root/.cloudflare/env
+    line: "{{ ENV_CF_API_KEY }}"
+    create: yes
+    insertbefore: "BOF"
+
+- lineinfile:
+    path: /root/.cloudflare/env
+    line: "{{ ENV_CF_API_EMAIL }}"
+    create: yes
+    insertafter: "EOF"
+
+- name: "Set timezone to America/New_York"
+  timezone:
+    name: "America/New_York"
+
+- name: "Disallow password authentication"
+  lineinfile: dest=/etc/ssh/sshd_config
+              regexp="^PasswordAuthentication"
+              line="PasswordAuthentication no"
+              state=present
+  notify: Restart ssh
+
+- name: "Remove unnecessary packages"
+  apt: name={{ item }} state=absent purge=yes
+  with_items:
+    - nfs-kernel-server
+    - nfs-common
+    - portmap
+    - rpcbind
+    - autofs

@@ -1,0 +1,51 @@
+ferm__rules:
+  - name: 'allow_ssh'
+    rules:
+
+      - dport: 'ssh'
+        accept_any: True
+
+  - name: 'allow_http_https'
+    rules:
+
+      - dport: 'http'
+        accept_any: True
+
+      - dport: 'https'
+        accept_any: True
+
+  - name: 'allow_traefik'
+    rules:
+
+      ## Use by Traefik
+      - dport: '8080'
+        accept_any: True
+
+  - name: 'allow_docker'
+    rules:
+
+      ## TCP port 2376 for secure Docker client communication. This port is required for Docker Machine to work. Docker Machine is used to orchestrate Docker hosts.
+      - dport: '2376'
+        protocol: 
+          - "tcp"
+        accept_any: True
+
+      ## TCP and UDP port 7946 for communication among nodes (container network discovery).
+      - dport: '7946'
+        protocol: 
+          - "tcp"
+          - "udp"
+        accept_any: True
+
+      ## UDP port 4789 for overlay network traffic (container ingress networking).
+      - dport: '4789'
+        protocol: 
+          - "udp"
+        accept_any: True
+
+      ## On Leader only | To disable on Workers
+      ## Port 2377 is used for communication between the nodes of a Docker Swarm or cluster. It only needs to be opened on manager nodes.
+      - dport: '2377'
+        protocol: 
+          - "tcp"
+        accept_any: True

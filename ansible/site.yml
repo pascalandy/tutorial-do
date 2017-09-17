@@ -1,6 +1,25 @@
+- hosts: example
+  gather_facts: no
+  become: True
+  pre_tasks:
+    - name: 'install python2'
+      raw: apt-get update && apt-get -y install python-simplejson
+
 - name: All roles
   hosts: example
-
+  become: True
   roles:
-    - { role: commons,                          tags: ["role:commons"] }
+    - { role: debops.bootstrap,                 tags: [ "role:bootstrap" ] }
+    - { role: debops.core,                      tags: [ "role::core" ] }
 
+    - role: debops.ferm
+      tags: [ "role::ferm" ]
+      ferm__dependent_rules:
+        - "{{ docker__ferm__dependent_rules }}"
+        - "{{ ntp__ferm__dependent_rules }}"
+
+    - { role: debops.fail2ban,                  tags: [ "role::fail2ban" ] }
+    - { role: debops.ntp,                       tags: [ "role::ntp" ] }
+    - { role: debops.swapfile,                  tags: [ "role::swapfile" ] }
+    - { role: debops.docker,                    tags: [ "role::docker" ] }
+    - { role: commons,                          tags: [ "role::commons" ] }

@@ -1,0 +1,6 @@
+fail2ban_jails:
+  - name: 'sshd'
+    enabled: 'true'
+
+fail2ban_ignoreip:
+  - "74.59.73.34"
