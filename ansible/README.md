@@ -1,19 +1,11 @@
-## Install Ansible ##
+## Build Docker container ##
 
 ```bash
-pip install ansible
+docker build -t ansible-env .
 ```
 
-## Install required Ansible roles ##
-
-Roles are ways of automatically loading certain vars_files, tasks, and handlers based on a known file structure. Grouping content by roles also allows easy sharing of roles with other users.
+## Run ansible playbook ##
 
 ```bash
-ansible-galaxy install -r requirements.yml
-```
-
-## Run ansible against Docker conainer (for tests) ##
-
-```bash
-ansible-playbook -i test_hosts.ini test.yml
+docker run --rm -it -v "$(pwd):/app" ansible-env -i test_hosts.ini site.yml
 ```

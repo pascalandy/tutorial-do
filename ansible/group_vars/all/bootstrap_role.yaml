@@ -1,17 +1,35 @@
 bootstrap__raw: True
 bootstrap__packages:
   - dnsutils
-  - curl
   - sudo
+
+  # from /s2-main-config
+  - lbzip2
+  - bzip2
+  - unzip
+  - ccrypt
+  - tree
+  - secure-delete
   - git
-  - apt-transport-https
-  - ca-certificates
-  - gcc
-  - libffi-dev
-  - libssl-dev
-  - python-dev
-  - python-setuptools
-  - python-virtualenv
+  - git-core
+  - openssl
+  - htop
+  - tzdata
+  - httpie
+
+  - libpam-pwquality
+  - unattended-upgrades
+  - haveged
+  - lynx
+  - sslscan
+  - sysstat
+  - openssl-blacklist
+  - openssl-blacklist-extra
+
+  - postfix
+  - aide
+  - logwatch
+  - libdate-manip-perl
 bootstrap__admin: True
 bootstrap__admin_name: root
 bootstrap__admin_sshkeys:
