@@ -4,7 +4,7 @@
         owner=root
         group=root
         mode=0600
-- copy: src=./insecure-key dest=/root/.ssh/insecure-key owner=root group=root mode=0400
+- copy: src={{ GITLAB_PRIV_KEY_FILE }} dest=/root/.ssh/gitlab owner=root group=root mode=0400
 
 # s1-hardening
 - git: repo={{ GITLAB_DEPLOY_SETUP_URL }} version={{ GITLAB_DEPLOY_SETUP_BRANCH }}
@@ -12,28 +12,28 @@
         accept_hostkey=yes
         clone=yes
         force=yes
-        key_file=/root/.ssh/insecure-key
+        key_file=/root/.ssh/gitlab
 
 - git: repo={{ GITLAB_DEPLOY_LOGS_URL }} version={{ GITLAB_DEPLOY_LOGS_BRANCH }}
         dest=/root/temp/{{ GITLAB_DEPLOY_LOGS_REPO_NAME }}
         accept_hostkey=yes
         clone=yes
         force=yes
-        key_file=/root/.ssh/insecure-key
+        key_file=/root/.ssh/gitlab
 
 - git: repo={{ GITLAB_INFRA_AS_CODE_URL }} version=master
         dest=/root/temp/{{ GITLAB_INFRA_AS_CODE_REPO_NAME }}
         accept_hostkey=yes
         clone=yes
         force=yes
-        key_file=/root/.ssh/insecure-key
+        key_file=/root/.ssh/gitlab
 
 - git: repo={{ GIT_REPO_HARDENING }} version=master
         dest=/root/temp/hardening
         accept_hostkey=yes
         clone=yes
         force=yes
-        key_file=/root/.ssh/insecure-key
+        key_file=/root/.ssh/gitlab
 
 # s2-main-config
 

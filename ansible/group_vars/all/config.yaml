@@ -27,7 +27,4 @@ ENV_SWAP_SIZE: "512"
 ENV_CF_API_KEY: "a0asdasdasdasdasdasd0"
 ENV_CF_API_EMAIL: "user@example.net"
 
-GITLAB_PRIV_KEY: |
-  -----BEGIN RSA PRIVATE KEY-----
-  MIIJJwIBAAKCAgEAtRBBXlUIQGvg+P2LbrxTBMXwo6QQC7Sfk/yalz5YrqHZv9PS
-  -----END RSA PRIVATE KEY-----
+GITLAB_PRIV_KEY_FILE: './insecure-key'
