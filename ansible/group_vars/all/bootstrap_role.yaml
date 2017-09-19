@@ -33,5 +33,5 @@ bootstrap__packages:
 bootstrap__admin: True
 bootstrap__admin_name: root
 bootstrap__admin_sshkeys:
-  - "{{ lookup('file', 'insecure-key.pub') }}"
+  - "{{ SSH_PUBLIC_KEY }}"
 bootstrap__sudo: False
