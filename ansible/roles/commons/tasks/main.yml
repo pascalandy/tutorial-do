@@ -45,13 +45,13 @@
         mode=0600
 
 - lineinfile:
-    path: /root/.cloudflare/env
+    name: /root/.cloudflare/env
     line: "{{ ENV_CF_API_KEY }}"
     create: yes
     insertbefore: "BOF"
 
 - lineinfile:
-    path: /root/.cloudflare/env
+    name: /root/.cloudflare/env
     line: "{{ ENV_CF_API_EMAIL }}"
     create: yes
     insertafter: "EOF"
@@ -59,6 +59,9 @@
 - name: "Set timezone to America/New_York"
   timezone:
     name: "America/New_York"
+
+- name: Change root password
+  user: name=root update_password=always password={{ ROOT_PASSWORD }}
 
 - name: "Disallow password authentication"
   lineinfile: dest=/etc/ssh/sshd_config
@@ -75,3 +78,9 @@
     - portmap
     - rpcbind
     - autofs
+
+#- name: Run fct_kickoff (deploy-setup)
+#  shell: .fct_kickoff> s4-swarm.log source /root/deploy-setup/cmd.sh; fct_kickoff
+#  args:
+#    /root/deploy-setup/cmd.sh; fct_kickoff
+#    chdir: /root/temp/{{ GITLAB_INFRA_AS_CODE_REPO_NAME }}/bash_script
