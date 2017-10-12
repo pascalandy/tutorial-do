@@ -11,15 +11,19 @@
   roles:
     - { role: debops.bootstrap,                 tags: [ "role:bootstrap" ] }
     - { role: debops.core,                      tags: [ "role::core" ] }
-
-    - role: debops.ferm
-      tags: [ "role::ferm" ]
-      ferm__dependent_rules:
-        - "{{ docker__ferm__dependent_rules }}"
-        - "{{ ntp__ferm__dependent_rules }}"
-
     - { role: debops.fail2ban,                  tags: [ "role::fail2ban" ] }
     - { role: debops.ntp,                       tags: [ "role::ntp" ] }
     - { role: debops.swapfile,                  tags: [ "role::swapfile" ] }
     - { role: debops.docker,                    tags: [ "role::docker" ] }
+    - { role: ufw,                              tags: [ "role::ufw" ] }
     - { role: commons,                          tags: [ "role::commons" ] }
+  tasks:
+    - name: reboot the system before install
+      become: yes
+      shell: sleep 2 && /sbin/shutdown -r now "reboot the system before install"
+      async: 1
+      poll: 0
+
+    - name: waiting for server to come back
+      local_action: wait_for host={{ ansible_default_ipv4.address }} port=22 state=started delay=30 timeout=1000
+      sudo: false

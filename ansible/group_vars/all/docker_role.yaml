@@ -1,4 +1,2 @@
 docker__upstream: true
-docker__upstream_key: 58118E89F3A912897C070ADBF76221572C52609D
-docker__upstream_repository: 'deb https://apt.dockerproject.org/repo {{ ansible_distribution | lower }}-{{ ansible_distribution_release }} main'
 docker__tcp: true

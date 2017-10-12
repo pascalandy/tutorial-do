@@ -1,0 +1,57 @@
+- name: Install ufw
+  apt: package=ufw state=present
+
+- ufw:
+    rule: allow
+    port: ssh
+    proto: tcp
+  notify:
+    - restart ufw
+
+- ufw:
+    rule: allow
+    port: ssh
+    proto: tcp
+  notify:
+    - restart ufw
+
+- ufw:
+    rule: allow
+    port: 80,443
+    proto: tcp
+  notify:
+    - restart ufw
+
+## Use by Traefik
+- ufw:
+    rule: allow
+    port: 8080
+    proto: tcp
+  notify:
+    - restart ufw
+
+
+## TCP port 2376 for secure Docker client communication. This port is required for Docker Machine to work. Docker Machine is used to orchestrate Docker hosts.
+## TCP and UDP port 7946 for communication among nodes (container network discovery).
+## UDP port 4789 for overlay network traffic (container ingress networking).
+## On Leader only | To disable on Workers
+## Port 2377 is used for communication between the nodes of a Docker Swarm or cluster. It only needs to be opened on manager nodes.
+
+- ufw:
+    rule: allow
+    port: 2376,7946,2377
+    proto: tcp
+  notify:
+    - restart ufw
+
+- ufw:
+    rule: allow
+    port: 7946,4789
+    proto: udp
+  notify:
+    - restart ufw
+
+- name: Enable ufw
+  ufw: state=enabled
+  notify:
+    - restart ufw
