@@ -27,4 +27,6 @@ ENV_SWAP_SIZE: "512"
 ENV_CF_API_KEY: "a0asdasdasdasdasdasd0"
 ENV_CF_API_EMAIL: "user@example.net"
 
-GITLAB_PRIV_KEY_FILE: './insecure-key'
+# python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+ROOT_PASSWORD: '$6$rounds=6
+ansible_ssh_private_key_file: ~/.ssh/id_rsa
