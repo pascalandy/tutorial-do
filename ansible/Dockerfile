@@ -3,7 +3,7 @@ FROM python:2-alpine
 COPY ./requirements* /app/
 WORKDIR /app
 
-RUN apk -U add make openssh gcc libc-dev libffi-dev openssl-dev ca-certificates git \
+RUN apk -U add make openssh gcc libc-dev libffi-dev openssl-dev ca-certificates git sshpass \
     && pip install -r requirements.txt \
     && ansible-galaxy install -r requirements.yml 
 
