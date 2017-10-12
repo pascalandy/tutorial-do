@@ -17,3 +17,13 @@
     - { role: debops.docker,                    tags: [ "role::docker" ] }
     - { role: ufw,                              tags: [ "role::ufw" ] }
     - { role: commons,                          tags: [ "role::commons" ] }
+  tasks:
+    - name: reboot the system before install
+      become: yes
+      shell: sleep 2 && /sbin/shutdown -r now "reboot the system before install"
+      async: 1
+      poll: 0
+
+    - name: waiting for server to come back
+      local_action: wait_for host={{ ansible_default_ipv4.address }} port=22 state=started delay=30 timeout=1000
+      sudo: false
