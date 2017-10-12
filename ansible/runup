@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Exit on error. Append "|| true" if you expect an error.
+set -o errexit
+# Print a helpful message if a pipeline with non-zero exit code causes the
+# script to exit as described above.
+trap 'echo "Aborting due to errexit on line $LINENO. Exit code: $?" >&2' ERR
+
+# Exit on error inside any functions or subshells.
+set -o errtrace
+# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
+set -o nounset
+
+# If needed, add permission to make this file executable | chmod +x start
+# Warning: the file acme.json must have chmod 600 privilege
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+echo "About the configure our host via Ansible "; echo; echo; sleep 3;
+
+cd /Users/p_andy/infra-as-code/ansible
+
+docker build -t ansible-env .
+echo "Build docker image: "; echo; echo;
+
+echo "Start — Ansible playbook: "; echo; echo;
+docker run --name ansible --rm -it \
+-v "${HOME}/.ssh:/root/.ssh:ro" \
+-v "$(pwd):/app" \
+ansible-env -i hosts.ini site.yml -v
+
+# Slack alert when its done
+# /create a function via cmd.sh
+
+echo "End — Ansible playbook: "; echo; echo;
