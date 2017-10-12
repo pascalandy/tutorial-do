@@ -11,15 +11,9 @@
   roles:
     - { role: debops.bootstrap,                 tags: [ "role:bootstrap" ] }
     - { role: debops.core,                      tags: [ "role::core" ] }
-
-    - role: debops.ferm
-      tags: [ "role::ferm" ]
-      ferm__dependent_rules:
-        - "{{ docker__ferm__dependent_rules }}"
-        - "{{ ntp__ferm__dependent_rules }}"
-
     - { role: debops.fail2ban,                  tags: [ "role::fail2ban" ] }
     - { role: debops.ntp,                       tags: [ "role::ntp" ] }
     - { role: debops.swapfile,                  tags: [ "role::swapfile" ] }
     - { role: debops.docker,                    tags: [ "role::docker" ] }
+    - { role: ufw,                              tags: [ "role::ufw" ] }
     - { role: commons,                          tags: [ "role::commons" ] }

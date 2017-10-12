@@ -2,6 +2,5 @@
 - name: debops.docker
 - name: debops.swapfile
 - name: debops.ntp
-- name: debops.ferm
 - name: debops.fail2ban
 - name: debops.core
