@@ -2,6 +2,10 @@ bootstrap__raw: True
 bootstrap__packages:
   - dnsutils
   - sudo
+  - ufw
+  - apt-transport-https
+  - ca-certificates
+  - software-properties-common
 
   # from /s2-main-config
   - lbzip2
